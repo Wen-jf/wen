@@ -1,0 +1,424 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import about from '../assets/about.webp';
+---
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../public/global.css">
+		<meta name="generator" content={Astro.generator} />
+		<title>News</title>
+		<style>
+		    .news {
+                color: #585f69;
+                text-align: center;
+                margin-top: 80px;
+                margin-bottom: 80px;
+            }
+
+            :root {
+                --primary: #72c02c;
+                --primary-light: #818cf8;
+                --dark: #1e293b;
+                --light: #f8fafc;
+                --gray: #64748b;
+                --light-gray: #e2e8f0;
+                --card-bg: #ffffff;
+                --shadow: rgba(0, 0, 0, 0.08);
+                --transition: all 0.3s ease;
+            }
+
+            /* Page Title */
+            .page-title {
+                text-align: center;
+                margin-bottom: 50px;
+                position: relative;
+            }
+
+            .page-title p {
+                color: var(--gray);
+                font-size: 1.2rem;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .news-controls {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                flex-wrap: wrap;
+                gap: 20px;
+                background: var(--card-bg);
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: var(--shadow);
+            }
+
+            .search-box {
+                position: relative;
+                flex: 1;
+                max-width: 400px;
+            }
+
+            .search-box i {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--gray);
+            }
+
+            .search-box input {
+                width: 100%;
+                padding: 12px 20px 12px 45px;
+                border: 2px solid var(--light-gray);
+                border-radius: 50px;
+                font-size: 1rem;
+                background: transparent;
+                color: var(--dark);
+                transition: var(--transition);
+            }
+
+            .search-box input:focus {
+                border-color: var(--primary);
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            }
+
+            .category-filter {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .filter-btn {
+                background: var(--light-gray);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 50px;
+                cursor: pointer;
+                font-weight: 500;
+                transition: var(--transition);
+            }
+
+            .filter-btn.active,
+            .filter-btn:hover {
+                background: var(--primary);
+                color: white;
+            }
+
+            /* News Grid */
+            .news-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 30px;
+                margin-bottom: 60px;
+            }
+
+            .news-card {
+                background: var(--card-bg);
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px var(--shadow);
+                transition: var(--transition);
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .news-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            }
+
+            .card-image {
+                height: 200px;
+                background: linear-gradient(45deg, var(--primary), var(--primary-light));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem;
+                font-weight: 600;
+                position: relative;
+            }
+
+            .card-image > img {
+                width: 100%;
+                max-height: 200px;
+            }
+
+
+
+            .card-content {
+                padding: 25px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .news-meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                font-size: 0.9rem;
+                color: var(--gray);
+            }
+
+            .category-tag {
+                background: rgba(79, 70, 229, 0.1);
+                color: var(--primary);
+                padding: 5px 15px;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 0.85rem;
+            }
+
+            .news-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+                line-height: 1.4;
+            }
+
+            .news-excerpt {
+                color: var(--gray);
+                margin-bottom: 25px;
+                flex: 1;
+            }
+
+            .card-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .read-more {
+                display: inline-flex;
+                align-items: center;
+                color: var(--primary);
+                font-weight: 600;
+                text-decoration: none;
+                gap: 8px;
+                transition: var(--transition);
+            }
+
+            .read-more:hover {
+                transform: translateX(5px);
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 30px;
+            }
+
+            .pagination-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid var(--light-gray);
+                background: transparent;
+                color: var(--dark);
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+
+            .pagination-btn.active,
+            .pagination-btn:hover {
+                background: var(--primary);
+                color: white;
+                border-color: var(--primary);
+            }
+
+            @media (max-width: 768px) {
+                .page-title h1 {
+                    font-size: 2.2rem;
+                }
+
+                .page-title p {
+                    font-size: 1rem;
+                }
+
+                .news-controls {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+
+                .search-box {
+                    max-width: 100%;
+                }
+
+                .news-grid {
+                    grid-template-columns: 1fr;
+                }
+                .news .container{
+                    padding: 0;
+                }
+            }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="container news">
+            <h1>News</h1>
+            <div class="">
+                <div class="page-title">
+                    <p>Stay updated with the most recent developments in technology, business, and innovation</p>
+                </div>
+
+                <div class="news-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search news...">
+                    </div>
+
+                    <div class="category-filter">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Technology</button>
+                        <button class="filter-btn">Business</button>
+                        <button class="filter-btn">Science</button>
+                        <button class="filter-btn">Health</button>
+                    </div>
+                </div>
+
+                <div class="news-grid">
+                    <!-- 1 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <Image src={about} alt="Jieying backend management system statistics"/>
+                        </div>
+                        <div class="card-content">
+                            <div class="news-meta">
+                                <span>October 15, 2023</span>
+                                <span class="category-tag">Technology</span>
+                            </div>
+                            <h3 class="news-title">AI Revolutionizing Healthcare Diagnostics</h3>
+                            <p class="news-excerpt">Artificial intelligence systems now outperforming human doctors in early detection of certain diseases.</p>
+                            <div class="card-footer">
+                                <span></span>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 2 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <Image src={about} alt="Jieying backend management system statistics"/>
+                        </div>
+                        <div class="card-content">
+                            <div class="news-meta">
+                                <span>October 12, 2023</span>
+                                <span class="category-tag">Business</span>
+                            </div>
+                            <h3 class="news-title">Global Markets React to New Economic Policies</h3>
+                            <p class="news-excerpt">Financial markets worldwide show mixed reactions as governments implement new economic recovery strategies.</p>
+                            <div class="card-footer">
+                                <span></span>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 3 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <Image src={about} alt="Jieying backend management system statistics"/>
+                        </div>
+                        <div class="card-content">
+                            <div class="news-meta">
+                                <span>October 10, 2023</span>
+                                <span class="category-tag">Science</span>
+                            </div>
+                            <h3 class="news-title">Breakthrough in Quantum Computing Announced</h3>
+                            <p class="news-excerpt">Researchers achieve quantum supremacy milestone, opening new possibilities for complex problem solving.</p>
+                            <div class="card-footer">
+                                <span></span>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 4 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <Image src={about} alt="Jieying backend management system statistics"/>
+                        </div>
+                        <div class="card-content">
+                            <div class="news-meta">
+                                <span>October 8, 2023</span>
+                                <span class="category-tag">Health</span>
+                            </div>
+                            <h3 class="news-title">New Study Reveals Benefits of Mediterranean Diet</h3>
+                            <p class="news-excerpt">Comprehensive research confirms significant health improvements for participants following Mediterranean eating patterns.</p>
+                            <div class="card-footer">
+                                <span></span>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 5 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <Image src={about} alt="Jieying backend management system statistics"/>
+                        </div>
+                        <div class="card-content">
+                            <div class="news-meta">
+                                <span>October 5, 2023</span>
+                                <span class="category-tag">Technology</span>
+                            </div>
+                            <h3 class="news-title">AI Revolutionizing Healthcare Diagnostics</h3>
+                            <p class="news-excerpt">Artificial intelligence systems now outperforming human doctors in early detection of certain diseases.</p>
+                            <div class="card-footer">
+                                <span></span>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 6 -->
+                    <article class="news-card">
+                        <div class="card-image">
+                            <Image src={about} alt="Jieying backend management system statistics"/>
+                        </div>xq
+                        <div class="card-content">
+                            <div class="news-meta">
+                                <span>October 1, 2023</span>
+                                <span class="category-tag">Business</span>
+                            </div>
+                            <h3 class="news-title">Sustainable Business Practices Drive Record Profits</h3>
+                            <p class="news-excerpt">Companies prioritizing environmental responsibility are seeing unprecedented financial success.</p>
+                            <div class="card-footer">
+                                <span></span>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn">5</button>
+                </div>
+            </div>
+        </main>
+        <Footer />
+	</body>
+</html>

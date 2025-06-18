@@ -5,16 +5,10 @@
     ---
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
+            --primary: #72c02c;
             --dark: #212529;
-            --success: #4cc9f0;
-            --text: #333;
             --transition: all 0.3s ease;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --radius: 8px;
         }
 
         * {
@@ -26,7 +20,6 @@
         body {
             font-family: Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--text);
             background-color: #f0f2f5;
             overflow-x: hidden;
         }
@@ -119,7 +112,7 @@
                 background-color: white;
                 width: 100%;
                 text-align: center;
-                transition: 0.3s;
+                transition: var(--transition);
                 box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
                 padding: 2rem 0;
             }
@@ -146,15 +139,16 @@
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <Image src={logo} alt="China Google SEO Company" />
+                    <a href="/" title="China Google SEO Company">
+                        <Image src={logo} alt="China Google SEO Company" />
+                    </a>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Video</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/" title="Home">Home</a></li>
+                    <li><a href="/Products/" title="Products">Products</a></li>
+                    <li><a href="/About/" title="About Us">About Us</a></li>
+                    <li><a href="/News/" title="News">News</a></li>
+                    <li><a href="/Contact/" title="Contact Us">Contact Us</a></li>
                 </ul>
                 <div class="hamburger">
                     <i class="fas fa-bars"></i>

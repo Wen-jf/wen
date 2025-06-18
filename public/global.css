@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+p, li, li a, label {
+    color: #555;
+}
+
+a {
+    color: #72c02c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #72c02c;
+    text-decoration: underline;
+}

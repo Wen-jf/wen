@@ -1,0 +1,171 @@
+<style>
+    .footer {
+        color: white;
+        background: #353A34;
+    }
+
+    .footer a {
+        color: white;
+    }
+
+    .footer a:hover {
+        color: #38952B;
+        opacity: 1;
+    }
+
+    .footer > .footerList {
+        padding: 70px 0;
+    }
+
+    .footer > .footerList .row > div p {
+        width: 100%;
+        font-size: 24px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #FFFFFF;
+        margin-bottom: 35px;
+        text-transform: capitalize;
+    }
+
+    .footer > .footerList .row > div:nth-child(1) {
+        padding-right: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .footer > .footerList .row > div:nth-child(1) > a {
+        display: block;
+        width: 50%;
+        margin-bottom: 18px;
+        text-transform: capitalize;
+    }
+
+    .footer > .footerList .row > div:nth-child(1) > div {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .social-links {
+        display: flex;
+        margin-top: 1.5rem;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transition: var(--transition);
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+        transform: translateY(-5px);
+    }
+
+    .footer > .footerList .row > div:nth-child(2) {
+        padding-right: 80px;
+    }
+
+    .footer > .footerList .row > div:nth-child(2) span {
+        margin-right: 5px;
+    }
+
+    .footer > .footerList .row > div:nth-child(2) > div {
+        margin-bottom: 15px;
+    }
+
+    .footer > .footerList .row > div:nth-child(3) a {
+        display: block;
+        margin-bottom: 18px;
+    }
+
+    .footer > div:last-child {
+        font-size: 12px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #FFFFFF;
+        padding: 15px 0;
+        text-align: center;
+        border-top: 1px solid #979797;
+    }
+
+    @media (max-width: 992px) {
+        .footer > .footerList {
+            padding: 40px 0;
+        }
+
+        .footer > .footerList .row > div p {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .footer > .footerList .row > div {
+            padding-right: calc(var(--bs-gutter-x) * .5) !important;
+            margin-bottom: 50px;
+        }
+
+        .footer > .footerList .row > div a, .footer > .footerList .row > div span {
+            font-size: 12px !important;
+            margin-bottom: 12px !important;
+        }
+
+    }
+</style>
+
+<div class="footer">
+    <div class="footerList">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <p>Quick Links /</p>
+                    <a href="/" title="Home">Home</a>
+                    <a href="/Products/" title="Products">Products</a>
+                    <a href="/About/" title="About Us">About Us</a>
+                    <a href="/News/" title="News">News</a>
+                    <a href="/Contact/" title="Contact Us">Contact Us</a>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <p>About Us /</p>
+                    <div>
+                        <span>Tel: </span>
+                        <a href="tel:13400729427">13400729427</a>
+                    </div>
+                    <div>
+                        <span>email: </span>
+                        <a href="mailto:wenjinfu9@gmail.com">wenjinfu9@gmail.com</a>
+                    </div>
+                    <div>
+                        <span>address: </span>
+                        <a href="#">
+                            Rm 2607, No.879 Xiahe Road, Xiamen, Fujian, China.
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <p>Hot Tag /</p>
+                    <a href="">Independent Station</a>
+                    <a href="">SEO</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        Copyright © 2011 - 2025 Jeawin Internet Technology Co., Ltd. All Right Reserved.
+    </div>
+</div>
