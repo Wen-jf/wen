@@ -1,190 +1,189 @@
-    ---
-    import { Image } from 'astro:assets';
-    import logo from '../assets/logo.webp';
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.webp';
+import { headerData } from '../data/header'; // 导入本地数据
+---
 
-    ---
-    <style>
-        :root {
-            --primary: #72c02c;
-            --dark: #212529;
-            --transition: all 0.3s ease;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">
+        <a href={headerData.logo.href} title={headerData.logo.alt}>
+          <Image src={logo} alt={headerData.logo.alt} />
+        </a>
+      </div>
+      <ul class="nav-links">
+        {headerData.navLinks.map((link) => (
+          <li>
+            <a href={link.href} title={link.title}>{link.title}</a>
+          </li>
+        ))}
+      </ul>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // 移动端菜单切换
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // 滚动动画效果
+  document.addEventListener('DOMContentLoaded', function() {
+    const featureCards = document.querySelectorAll('.feature-card');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
         }
+      });
+    }, { threshold: 0.1 });
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    featureCards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(card);
+    });
+  });
+</script>
 
-        body {
-            font-family: Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background-color: #f0f2f5;
-            overflow-x: hidden;
-        }
+<style>
+  :root {
+    --primary: #72c02c;
+    --dark: #212529;
+    --transition: all 0.3s ease;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-        /* 头部样式 */
-        header {
-            background-color: white;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+  body {
+    font-family: Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f2f5;
+    overflow-x: hidden;
+  }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 0;
-        }
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
+  /* 头部样式 */
+  header {
+    background-color: white;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+  }
 
-        .nav-links li {
-            margin-left: 2rem;
-        }
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 0;
-            position: relative;
-        }
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+  .nav-links li {
+    margin-left: 2rem;
+  }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: var(--transition);
-        }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 0.5rem 0;
+    position: relative;
+  }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+  .nav-links a:hover {
+    color: var(--primary);
+  }
 
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+  }
 
+  .nav-links a:hover::after {
+    width: 100%;
+  }
 
-        @media (max-width: 992px) {
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
 
-        }
+  @media (max-width: 992px) {
 
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                flex-direction: column;
-                background-color: white;
-                width: 100%;
-                text-align: center;
-                transition: var(--transition);
-                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-                padding: 2rem 0;
-            }
+  }
 
-            .nav-links.active {
-                right: 0;
-            }
+  @media (max-width: 768px) {
+    .nav-links {
+      position: fixed;
+      top: 70px;
+      right: -100%;
+      flex-direction: column;
+      background-color: white;
+      width: 100%;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      padding: 2rem 0;
+    }
 
-            .nav-links li {
-                margin: 1.5rem 0;
-            }
+    .nav-links.active {
+      right: 0;
+    }
 
-            .hamburger {
-                display: block;
-            }
-        }
-        @media (max-width: 480px) {
+    .nav-links li {
+      margin: 1.5rem 0;
+    }
 
-        }
-    </style>
+    .hamburger {
+      display: block;
+    }
+  }
 
+  @media (max-width: 480px) {
 
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <a href="/" title="China Google SEO Company">
-                        <Image src={logo} alt="China Google SEO Company" />
-                    </a>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="/" title="Home">Home</a></li>
-                    <li><a href="/Products/" title="Products">Products</a></li>
-                    <li><a href="/About/" title="About Us">About Us</a></li>
-                    <li><a href="/News/" title="News">News</a></li>
-                    <li><a href="/Contact/" title="Contact Us">Contact Us</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-
-    <script>
-        // 移动端菜单切换
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // 滚动动画效果
-        document.addEventListener('DOMContentLoaded', function() {
-            const featureCards = document.querySelectorAll('.feature-card');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            featureCards.forEach(card => {
-                card.style.opacity = 0;
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(card);
-            });
-        });
-    </script>
+  }
+</style>

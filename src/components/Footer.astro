@@ -1,3 +1,58 @@
+---
+import { headerData } from '../data/header'; // 导入本地数据
+---
+
+<div class="footer">
+    <div class="footerList">
+        <div class="container">
+            <div class="row">
+                <!-- 快速链接部分 -->
+                <div class="col-lg-4">
+                    <p>Quick Links /</p>
+                    {headerData.navLinks.map((link) => (
+                        <a href={link.href} title={link.title}>{link.title}</a>
+                    ))}
+                    <div class="social-links">
+                        {headerData.socialLinks.map(social => (
+                            <a href={social.href}><i class={social.icon}></i></a>
+                        ))}
+                    </div>
+                </div>
+
+                <!-- 联系我们部分 -->
+                <div class="col-lg-4">
+                    <p>About Us /</p>
+                    <div>
+                        <span>{headerData.contactInfo.tel.label}</span>
+                        <a href={headerData.contactInfo.tel.href}>{headerData.contactInfo.tel.value}</a>
+                    </div>
+                    <div>
+                        <span>{headerData.contactInfo.email.label}</span>
+                        <a href={headerData.contactInfo.email.href}>{headerData.contactInfo.email.value}</a>
+                    </div>
+                    <div>
+                        <span>{headerData.contactInfo.address.label}</span>
+                        <a href={headerData.contactInfo.address.href}>
+                            {headerData.contactInfo.address.value}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 热门标签部分 -->
+                <div class="col-lg-4">
+                    <p>Hot Tag /</p>
+                    {headerData.hotTags.map(tag => (
+                        <a href={tag.href}>{tag.title}</a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        {headerData.copyright}
+    </div>
+</div>
+
 <style>
     .footer {
         color: white;
@@ -118,54 +173,5 @@
             font-size: 12px !important;
             margin-bottom: 12px !important;
         }
-
     }
 </style>
-
-<div class="footer">
-    <div class="footerList">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <p>Quick Links /</p>
-                    <a href="/" title="Home">Home</a>
-                    <a href="/Products/" title="Products">Products</a>
-                    <a href="/About/" title="About Us">About Us</a>
-                    <a href="/News/" title="News">News</a>
-                    <a href="/Contact/" title="Contact Us">Contact Us</a>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <p>About Us /</p>
-                    <div>
-                        <span>Tel: </span>
-                        <a href="tel:13400729427">13400729427</a>
-                    </div>
-                    <div>
-                        <span>email: </span>
-                        <a href="mailto:wenjinfu9@gmail.com">wenjinfu9@gmail.com</a>
-                    </div>
-                    <div>
-                        <span>address: </span>
-                        <a href="#">
-                            Rm 2607, No.879 Xiahe Road, Xiamen, Fujian, China.
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <p>Hot Tag /</p>
-                    <a href="">Independent Station</a>
-                    <a href="">SEO</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        Copyright © 2011 - 2025 Jeawin Internet Technology Co., Ltd. All Right Reserved.
-    </div>
-</div>

@@ -1,569 +1,624 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 定义本地数据结构
+const pageData = {
+  pageTitle: "Expert in Global Trade Solutions",
+  seo_title: "Global Trade Solutions | Import/Export Services",
+  hero: {
+    title: "Expert in Global Trade Solutions",
+    description: "Connecting the global market, providing high-quality import and export services, and helping enterprises expand their international business",
+    ctaText: "Get professional consultation"
+  },
+  services: {
+    title: "Our core services",
+    items: [
+      {
+        icon: "fas fa-globe-americas",
+        title: "Global sourcing",
+        description: "We help you find high-quality suppliers worldwide, ensuring product quality and optimal prices, and simplifying your procurement process."
+      },
+      {
+        icon: "fas fa-ship",
+        title: "International logistics",
+        description: "Provide efficient and reliable sea, air, and multimodal transportation solutions, optimize transportation costs, and ensure timely and safe arrival of goods."
+      },
+      {
+        icon: "fas fa-file-contract",
+        title: "Custom clearance",
+        description: "A professional team handles import and export customs declaration, inspection and quarantine, and document preparation to ensure the smooth passage of your goods through customs."
+      }
+    ]
+  },
+   products: {
+      title: "Product Categories",
+      items: [
+        {
+          image: "https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1949&q=80",
+          title: "Electronic products",
+          description: "Global procurement and distribution of various electronic products such as smartphones, computer accessories, and household appliances.",
+          category: "electronics"
+        },
+        {
+          image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80",
+          title: "Textiles",
+          description: "High quality fabrics, ready to wear clothing, home textiles, etc., meet the needs of different markets.",
+          category: "textiles"
+        },
+        {
+          image: "https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+          title: "Machinery & Equipment",
+          description: "Industrial machinery, construction equipment and specialized tools for various industries.",
+          category: "machinery"
+        },
+        {
+          image: "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80",
+          title: "Agricultural Products",
+          description: "Fresh produce, grains, and processed food items sourced globally.",
+          category: "agriculture"
+        },
+        {
+          image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1964&q=80",
+          title: "Furniture & Home Decor",
+          description: "Handcrafted and manufactured furniture for home and office environments.",
+          category: "furniture"
+        },
+        {
+          image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+          title: "Automotive Parts",
+          description: "Quality components and accessories for all types of vehicles.",
+          category: "automotive"
+        }
+      ]
+    },
+  stats: {
+    items: [
+      { number: "15+", title: "Operating years", description: "Rich experience in international trade" },
+      { number: "120+", title: "Cooperative countries", description: "Global business network coverage" },
+      { number: "5000+", title: "Satisfied customers", description: "Trustworthy service quality" },
+      { number: "98%", title: "On-time delivery rate", description: "Efficient and reliable logistics services" }
+    ]
+  },
+  contact: {
+    title: "Contact Us",
+    info: {
+      address: "Rm 2607, No.879 Xiahe Road, Xiamen, Fujian, China.",
+      phone: "13400729427",
+      email: "wenjinfu9@gmail.com",
+      working_hours: "Monday to Friday: 9:00 - 18:00"
+    }
+  }
+};
+
+// 解构数据
+const {
+  pageTitle,
+  hero,
+  services,
+  products,
+  stats,
+  contact
+} = pageData;
 ---
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-		<meta name="generator" content={Astro.generator} />
-		<title>home</title>
-		<style>
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 20px;
-            }
 
-            /* Hero Section */
-            .hero {
-                background: linear-gradient(rgb(103 204 97 / 90%), rgb(36 86 126 / 80%)), url(https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80);
-                background-size: cover;
-                background-position: center;
-                height: 85vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                color: white;
-                border-radius: 0 0 30px 30px;
-                margin-bottom: 50px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
+        <BaseLayout>
+            <main>
+                <section class="hero">
+                    <div class="hero-content">
+                        <h1>{hero.title}</h1>
+                        <p>{hero.description}</p>
+                        <a href="#contact" class="cta-button">{hero.ctaText}</a>
+                    </div>
+                </section>
 
-            .hero-content {
-                max-width: 800px;
-                padding: 20px;
+                <div class="container">
+                    <!-- Services Section -->
+                    <section class="services-section">
+                        <div class="section-title">
+                            <h2>{services.title}</h2>
+                        </div>
+
+                        <div class="services">
+                            {services.items.map(service => (
+                                <div class="service-card">
+                                    <div class="service-icon">
+                                        <i class={service.icon}></i>
+                                    </div>
+                                    <h3>{service.title}</h3>
+                                    <p>{service.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <!-- Product Categories -->
+                    <section class="products">
+                        <div class="section-title">
+                            <h2>{products.title}</h2>
+                        </div>
+
+                        <!-- 在首页的产品卡片部分 -->
+                        <div class="product-grid">
+                          {products.items.map(product => (
+                            <a
+                              class="product-card"
+                              href={`/products/${product.category}`}
+                              aria-label={`View ${product.title} products`}
+                            >
+                              <div class="product-image">
+                                <img src={product.image} alt={product.title} />
+                              </div>
+                              <div class="product-info">
+                                <h3>{product.title}</h3>
+                                <p>{product.description}</p>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                    </section>
+
+                    <!-- Stats Section -->
+                    <section class="stats">
+                        <div class="stats-grid">
+                            {stats.items.map(stat => (
+                                <div class="stat-item">
+                                    <div class="stat-number">{stat.number}</div>
+                                    <h3>{stat.title}</h3>
+                                    <p>{stat.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section class="contact" id="contact">
+                        <div class="section-title">
+                            <h2>{contact.title}</h2>
+                        </div>
+
+                        <div class="contact-container">
+                            <div class="contact-info">
+                                <h3>Get professional consultation</h3>
+
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Company address</h4>
+                                        <p>{contact.info.address}</p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Tel</h4>
+                                        <p>{contact.info.phone}</p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4>email</h4>
+                                        <p>{contact.info.email}</p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h4>working hours</h4>
+                                        <p>{contact.info.working_hours}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-form">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="tel" id="phone" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" class="form-control" rows="5" required></textarea>
+                                    </div>
+
+                                    <button type="submit" class="submit-btn">Submit Consultation</button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </BaseLayout>
+
+<style>
+		.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgb(103 204 97 / 90%), rgb(36 86 126 / 80%)), url(https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80);
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b00;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #ff6b00;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #005293;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: #ff6b00;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 40px 25px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: #005293;
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #005293;
+        }
+
+        /* Products Section */
+        .products {
+            margin-bottom: 80px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-image > img {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #005293;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(rgba(0, 82, 147, 0.95), rgba(0, 82, 147, 0.95)), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            margin-bottom: 80px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .stats p {
+            color: white;
+            opacity: .8;
+        }
+
+        .contact p {
+            color: white;
+            opacity: .8;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ff6b00;
+        }
+
+        /* Contact Section */
+        .contact {
+            margin-bottom: 50px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            padding: 40px;
+            background: #005293;
+            color: white;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: #ff6b00;
+        }
+
+        .contact-form {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #005293;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #005293;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 82, 147, 0.1);
+        }
+
+        .submit-btn {
+            background: #005293;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover {
+            background: #003d6e;
+        }
+
+        .product-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .product-card::after {
+            content: "View Products";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-card::after {
+                font-size: 0.9rem;
+                padding: 8px;
             }
 
             .hero h1 {
-                font-size: 3.5rem;
-                margin-bottom: 20px;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                font-size: 2.5rem;
             }
 
             .hero p {
-                font-size: 1.5rem;
-                margin-bottom: 30px;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            }
-
-            .cta-button {
-                display: inline-block;
-                background: #ff6b00;
-                color: white;
-                padding: 15px 40px;
                 font-size: 1.2rem;
-                border-radius: 50px;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                border: 2px solid #ff6b00;
-                font-weight: 600;
-                letter-spacing: 1px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            }
-
-            .cta-button:hover {
-                background: transparent;
-                transform: translateY(-3px);
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            }
-
-            /* Services Section */
-            .section-title {
-                text-align: center;
-                margin-bottom: 50px;
-                color: #005293;
-                position: relative;
             }
 
             .section-title h2 {
-                font-size: 2.5rem;
-                display: inline-block;
-                padding-bottom: 15px;
-            }
-
-            .section-title h2::after {
-                content: '';
-                position: absolute;
-                width: 80px;
-                height: 4px;
-                background: #ff6b00;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                border-radius: 2px;
-            }
-
-            .services {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 30px;
-                margin-bottom: 80px;
-            }
-
-            .service-card {
-                background: white;
-                border-radius: 15px;
-                overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                text-align: center;
-                padding: 40px 25px;
-            }
-
-            .service-card:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            }
-
-            .service-icon {
-                font-size: 3.5rem;
-                color: #005293;
-                margin-bottom: 25px;
-            }
-
-            .service-card h3 {
-                font-size: 1.8rem;
-                margin-bottom: 15px;
-                color: #005293;
-            }
-
-            /* Products Section */
-            .products {
-                margin-bottom: 80px;
-            }
-
-            .product-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 30px;
-            }
-
-            .product-card {
-                background: white;
-                border-radius: 15px;
-                overflow: hidden;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-                transition: transform 0.3s ease;
-            }
-
-            .product-card:hover {
-                transform: translateY(-8px);
-            }
-
-            .product-image {
-                height: 220px;
-                background-size: cover;
-                background-position: center;
-            }
-
-            .product-image > img {
-                max-width: 100%;
-                height: 220px;
-                background-size: cover;
-                background-position: center;
-            }
-
-            .product-info {
-                padding: 25px;
-            }
-
-            .product-info h3 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-                color: #005293;
-            }
-
-            /* Stats Section */
-            .stats {
-                background: linear-gradient(rgba(0, 82, 147, 0.95), rgba(0, 82, 147, 0.95)), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-                background-size: cover;
-                background-position: center;
-                padding: 80px 0;
-                color: white;
-                text-align: center;
-                border-radius: 30px;
-                margin-bottom: 80px;
-            }
-
-            .stats-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 30px;
-            }
-
-            .stat-item {
-                padding: 20px;
+                font-size: 2rem;
             }
 
             .stat-number {
-                font-size: 3.5rem;
-                font-weight: 700;
-                margin-bottom: 10px;
-                color: #ff6b00;
-            }
-
-            /* Contact Section */
-            .contact {
-                margin-bottom: 50px;
-            }
-
-            .contact-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 40px;
-                background: white;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            }
-
-            .contact-info {
-                padding: 40px;
-                background: #005293;
-                color: white;
-            }
-
-            .contact-info h3 {
-                font-size: 1.8rem;
-                margin-bottom: 25px;
-            }
-
-            .contact-detail {
-                display: flex;
-                align-items: flex-start;
-                margin-bottom: 25px;
-            }
-
-            .contact-icon {
-                font-size: 1.5rem;
-                margin-right: 15px;
-                color: #ff6b00;
+                font-size: 2.5rem;
             }
 
             .contact-form {
-                padding: 40px;
+                padding: 20px;
             }
 
-            .form-group {
-                margin-bottom: 25px;
+            .contact-info {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 70vh;
             }
 
-            .form-group label {
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 500;
-                color: #005293;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .form-control {
-                width: 100%;
-                padding: 15px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
+            .hero p {
                 font-size: 1rem;
-                transition: border-color 0.3s ease;
             }
 
-            .form-control:focus {
-                border-color: #005293;
-                outline: none;
-                box-shadow: 0 0 0 3px rgba(0, 82, 147, 0.1);
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
             }
-
-            .submit-btn {
-                background: #005293;
-                color: white;
-                border: none;
-                padding: 15px 40px;
-                font-size: 1.1rem;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background 0.3s ease;
-                width: 100%;
-                font-weight: 600;
-            }
-
-            .submit-btn:hover {
-                background: #003d6e;
-            }
-
-            /* Responsive Design */
-            @media (max-width: 768px) {
-                .hero h1 {
-                    font-size: 2.5rem;
-                }
-
-                .hero p {
-                    font-size: 1.2rem;
-                }
-
-                .section-title h2 {
-                    font-size: 2rem;
-                }
-
-                .stat-number {
-                    font-size: 2.5rem;
-                }
-
-                .contact-form {
-                    padding: 20px;
-                }
-
-                .contact-info {
-                    padding: 20px;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .hero {
-                    height: 70vh;
-                }
-
-                .hero h1 {
-                    font-size: 2rem;
-                }
-
-                .hero p {
-                    font-size: 1rem;
-                }
-
-                .cta-button {
-                    padding: 12px 30px;
-                    font-size: 1rem;
-                }
-            }
-        </style>
-	</head>
-	<body>
-		<Header />
-		<main>
-            <section class="hero">
-                <div class="hero-content">
-                    <h1>Expert in Global Trade Solutions</h1>
-                    <p>Connecting the global market, providing high-quality import and export services, and helping
-                    enterprises expand their international business</p>
-                    <a href="#contact" class="cta-button">Get professional consultation</a>
-                </div>
-            </section>
-
-            <div class="container">
-                <!-- Services Section -->
-                <section class="services-section">
-                    <div class="section-title">
-                        <h2>Our core services</h2>
-                    </div>
-
-                    <div class="services">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-globe-americas"></i>
-                            </div>
-                            <h3>Global sourcing</h3>
-                            <p>We help you find high-quality suppliers worldwide, ensuring product quality and optimal
-                            prices, and simplifying your procurement process.</p>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-ship"></i>
-                            </div>
-                            <h3>International logistics</h3>
-                            <p>Provide efficient and reliable sea, air, and multimodal transportation solutions,
-                            optimize transportation costs, and ensure timely and safe arrival of goods.</p>
-                        </div>
-
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-file-contract"></i>
-                            </div>
-                            <h3>custom clearance</h3>
-                            <p>A professional team handles import and export customs declaration, inspection and
-                            quarantine, and document preparation to ensure the smooth passage of your goods through customs.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Products Section -->
-                <section class="products">
-                    <div class="section-title">
-                        <h2>Popular product categories</h2>
-                    </div>
-
-                    <div class="product-grid">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1949&q=80" alt="">
-                            </div>
-                            <div class="product-info">
-                                <h3>electronic product</h3>
-                                <p>Global procurement and distribution of various electronic products such as
-                                smartphones, computer accessories, and household appliances.</p>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-                            <div class="product-info">
-                                <h3>textile</h3>
-                                <p>High quality fabrics, ready to wear clothing, home textiles, etc., meet the needs of
-                                different markets.</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1949&q=80" alt="">
-                            </div>
-                            <div class="product-info">
-                                <h3>electronic product</h3>
-                                <p>Global procurement and distribution of various electronic products such as
-                                smartphones, computer accessories, and household appliances.</p>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-                            <div class="product-info">
-                                <h3>textile</h3>
-                                <p>High quality fabrics, ready to wear clothing, home textiles, etc., meet the needs of
-                                different markets.</p>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1949&q=80" alt="">
-                            </div>
-                            <div class="product-info">
-                                <h3>electronic product</h3>
-                                <p>Global procurement and distribution of various electronic products such as
-                                smartphones, computer accessories, and household appliances.</p>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-                            <div class="product-info">
-                                <h3>textile</h3>
-                                <p>High quality fabrics, ready to wear clothing, home textiles, etc., meet the needs of
-                                different markets.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Stats Section -->
-                <section class="stats">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number">15+</div>
-                            <h3>Operating years</h3>
-                            <p>Rich experience in international trade</p>
-                        </div>
-
-                        <div class="stat-item">
-                            <div class="stat-number">120+</div>
-                            <h3>Cooperative countries</h3>
-                            <p>Global business network coverage</p>
-                        </div>
-
-                        <div class="stat-item">
-                            <div class="stat-number">5000+</div>
-                            <h3>satisfied customer</h3>
-                            <p>Trustworthy service quality</p>
-                        </div>
-
-                        <div class="stat-item">
-                            <div class="stat-number">98%</div>
-                            <h3>On-time delivery rate</h3>
-                            <p>Efficient and reliable logistics services</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Contact Section -->
-                <section class="contact" id="contact">
-                    <div class="section-title">
-                        <h2>Contact Us</h2>
-                    </div>
-
-                    <div class="contact-container">
-                        <div class="contact-info">
-                            <h3>Get professional consultation</h3>
-
-                            <div class="contact-detail">
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h4>Company address</h4>
-                                    <p>Rm 2607, No.879 Xiahe Road, Xiamen, Fujian, China.</p>
-                                </div>
-                            </div>
-
-                            <div class="contact-detail">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div>
-                                    <h4>Tel</h4>
-                                    <p>13400729427</p>
-                                </div>
-                            </div>
-
-                            <div class="contact-detail">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4>email</h4>
-                                    <p>wenjinfu9@gmail.com</p>
-                                </div>
-                            </div>
-
-                            <div class="contact-detail">
-                                <div class="contact-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <h4>working hours</h4>
-                                    <p>Monday to Friday: 9:00 - 18:00</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-form">
-                            <form>
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" id="name" class="form-control" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" class="form-control" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="phone">Phone</label>
-                                    <input type="tel" id="phone" class="form-control" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea id="message" class="form-control" rows="5" required></textarea>
-                                </div>
-
-                                <button type="submit" class="submit-btn">Submit Consultation</button>
-                            </form>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </main>
-        <Footer />
-	</body>
-</html>
+        }
+		</style>

@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import productsData from '../../data/products.js';
+
+// 必须导出 getStaticPaths 函数
+export async function getStaticPaths() {
+  return productsData.map(product => ({
+    params: { id: product.id.toString() },
+    props: { product }
+  }));
+}
+
+// 通过 props 获取产品数据
+const { product } = Astro.props;
+
+if (!product) {
+  return Response.redirect('/404', 302);
+}
+---
+
+<BaseLayout>
+  <div class="container">
+    <div class="product-detail">
+      <div class="product-image">
+        <img src={product.image} alt={product.title} />
+      </div>
+      <div class="product-info">
+        <h1>{product.title}</h1>
+        <p class="category">{product.category}</p>
+        <p class="description">{product.description}</p>
+        <!-- 添加价格检查和默认值 -->
+        <div class="price">
+          ${product.price ? product.price.toFixed(2) : 'Price not available'}
+        </div>
+        <a href="/Contact/" class="add-to-cart">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .product-detail {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+  }
+
+  .product-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .product-info h1 {
+    font-size: 2.2rem;
+    color: #005293;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+
+  .category {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #444;
+  }
+
+  .price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6b00;
+    margin-bottom: 25px;
+  }
+
+  .add-to-cart {
+    background: #ff6b00;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .add-to-cart:hover {
+    background: #e65c00;
+  }
+
+  @media (max-width: 768px) {
+    .product-detail {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
